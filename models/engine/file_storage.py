@@ -17,18 +17,17 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        if cls is None:
-            return FileStorage.__objects
-        else:
-            cls = globals().get(cls) if isinstance(cls, str) else cls
-            if cls and issubclass(cls, BaseModel):
-                my_dict = {key: value for key, value in self.__objects.items() if isinstance(value, cls)}
-                return my_dict
-        #return {}
-
+        if cls:
+            if isinstance(cls, str):
+                cls = globals().get(cls)
+            if cls and isinstance(cls, BaseModel):
+                cls_dict = {key: value for key, value in self.__objects.items() if isinstance(value, cls)}
+                return cls_dict
+        return FileStorage.__objects
     def new(self, obj):
-        """Adds new object to storage dictionary"""
-        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        """sets in __objects the obj with key <obj class name>.id"""
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """Saves storage dictionary to file"""
@@ -62,4 +61,6 @@ class FileStorage:
         try:
             del FileStorage.__objects[objdel]
         except AttributeError:
+            pass
+        except KeyboardInterrupt:
             pass
