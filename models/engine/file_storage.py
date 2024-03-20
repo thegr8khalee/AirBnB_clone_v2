@@ -24,7 +24,7 @@ class FileStorage:
             if cls and issubclass(cls, BaseModel):
                 my_dict = {key: value for key, value in self.__objects.items() if isinstance(value, cls)}
                 return my_dict
-        return {}
+        #return {}
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
