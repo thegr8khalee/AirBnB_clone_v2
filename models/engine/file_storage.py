@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -8,9 +15,16 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        return FileStorage.__objects
+        if cls is None:
+            return FileStorage.__objects
+        else:
+            cls = globals().get(cls) if isinstance(cls, str) else cls
+            if cls and issubclass(cls, BaseModel):
+                my_dict = {key: value for key, value in self.__objects.items() if isinstance(value, cls)}
+                return my_dict
+        return {}
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -27,14 +41,6 @@ class FileStorage:
 
     def reload(self):
         """Loads storage dictionary from file"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.place import Place
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.review import Review
-
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
                     'State': State, 'City': City, 'Amenity': Amenity,
@@ -47,4 +53,13 @@ class FileStorage:
                 for key, val in temp.items():
                         self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
+            pass
+        
+    def delete(self, obj=None):
+        if obj is None:
+            return
+        objdel = f"{obj.__class__.__name__}.{obj.id}"
+        try:
+            del FileStorage.__objects[objdel]
+        except AttributeError:
             pass
