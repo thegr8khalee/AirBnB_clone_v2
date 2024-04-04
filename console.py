@@ -11,6 +11,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
@@ -84,14 +85,23 @@ class HBNBCommand(cmd.Cmd):
                     if (
                         pline[0] == "{"
                         and pline[-1] == "}"
+<<<<<<< HEAD
                         and type(eval(pline)) is dict  # noqa: E721
+=======
+                        and type(eval(pline)) is dict
+>>>>>>> 10fd128bcff5b91b19bb395712cc208dc84559d3
                     ):
                         _args = pline
                     else:
                         _args = pline.replace(",", "")
                         # _args = _args.replace('\"', '')
             line = " ".join([_cmd, _cls, _id, _args])
+<<<<<<< HEAD
         except Exception:
+=======
+
+        except Exception as mess:
+>>>>>>> 10fd128bcff5b91b19bb395712cc208dc84559d3
             pass
         finally:
             return line
@@ -135,6 +145,7 @@ class HBNBCommand(cmd.Cmd):
         elif class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+<<<<<<< HEAD
         all_words = args.split(" ")
         new_instance = eval(class_name)()
         for i in range(1, len(all_words)):
@@ -153,6 +164,28 @@ class HBNBCommand(cmd.Cmd):
         storage.new(new_instance)
         print(new_instance.id)
         new_instance.save()
+=======
+        lists = args.split(" ")
+
+        new_ins = eval(class_name)()
+
+        for i in range(1, len(lists)):
+            k, v = tuple(lists[i].split("="))
+            if v.startswith('"') and v.endswith('"'):
+                v = v.strip('"').replace("-", " ")
+            else:
+                try:
+                    v = eval(v)
+                except Exception:
+                    print("** cnat eval **")
+                    pass
+            if hasattr(new_ins, k):
+                setattr(new_ins, k, v)
+
+        storage.new(new_ins)
+        print(new_ins.id)
+        new_ins.save()
+>>>>>>> 10fd128bcff5b91b19bb395712cc208dc84559d3
 
     def help_create(self):
         """Help information for the create method"""
@@ -293,7 +326,11 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # first determine if kwargs or args
+<<<<<<< HEAD
         if "{" in args[2] and "}" in args[2] and type(eval(args[2])) is dict:  # noqa: E721
+=======
+        if "{" in args[2] and "}" in args[2] and type(eval(args[2])) is dict:
+>>>>>>> 10fd128bcff5b91b19bb395712cc208dc84559d3
             kwargs = eval(args[2])
             args = []  # reformat kwargs into list, ex: [<name>, <value>, ...]
             for k, v in kwargs.items():

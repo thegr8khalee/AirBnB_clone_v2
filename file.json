@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {}
+=======
+{"State.6998de1b-9583-4b7f-92cd-c5048d51cc2b": {"id": "6998de1b-9583-4b7f-92cd-c5048d51cc2b", "created_at": "2024-03-20T15:36:04.722364", "updated_at": "2024-03-20T15:36:04.722364", "__class__": "State"}, "State.c8749029-87e0-4a0d-a37e-7f2a8e4f1811": {"id": "c8749029-87e0-4a0d-a37e-7f2a8e4f1811", "created_at": "2024-03-20T15:54:55.604420", "updated_at": "2024-03-20T15:54:55.605419", "name": "Arizona", "__class__": "State"}, "Place.689d6d52-0686-4c6e-996f-db6eb0686240": {"id": "689d6d52-0686-4c6e-996f-db6eb0686240", "created_at": "2024-03-20T15:56:23.641528", "updated_at": "2024-03-20T15:56:23.641528", "city_id": "0001", "user_id": "0001", "name": "My_little_house", "number_rooms": 4, "number_bathrooms": 2, "max_guest": 10, "price_by_night": 300, "latitude": 37.773972, "longitude": -122.431297, "__class__": "Place"}}
+>>>>>>> 10fd128bcff5b91b19bb395712cc208dc84559d3
