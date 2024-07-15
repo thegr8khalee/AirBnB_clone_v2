@@ -14,7 +14,7 @@ sudo echo "<html>
   <head>
   </head>
   <body>
-    Holberton is the best School
+    Holberton School
   </body>
 </html>" | sudo tee /data/web_static/releases/test/index.html
 
