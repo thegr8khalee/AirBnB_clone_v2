@@ -83,15 +83,13 @@ def number_template(n):
 
 @app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def number_odd_or_even(n):
-    """
-    Route handler for the /number_odd_or_even/<int:n> URL.
-    Renders an HTML page indicating if <n> is odd or even.
+    """_summary_
 
     Args:
-        n (int): The integer number provided in the URL.
+        n (_type_): _description_
 
     Returns:
-        str: Rendered HTML template with the number and its parity (odd/even).
+        _type_: _description_
     """
     parity = "even" if n % 2 == 0 else "odd"
     return render_template("6-number_odd_or_even.html", number=n, parity=parity)
