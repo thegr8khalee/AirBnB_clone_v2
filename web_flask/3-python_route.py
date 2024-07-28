@@ -40,5 +40,20 @@ def c_text(text):
     return f"C {formatted_text}"
 
 
+@app.route("/python/", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def python_text(text="is cool"):
+    """_summary_
+
+    Args:
+        text (str, optional): _description_. Defaults to "is cool".
+
+    Returns:
+        _type_: _description_
+    """
+    formatted_text = text.replace("_", " ")
+    return f"Python {formatted_text}"
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
